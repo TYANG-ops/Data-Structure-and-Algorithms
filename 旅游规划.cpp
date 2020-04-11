@@ -2,14 +2,14 @@
 #define MaxVertex 505
 #define INF 100000
 typedef int Vertex;
-int N; // ¶¥µãÊı
-int M; // ±ß
+int N; // é¡¶ç‚¹æ•°
+int M; // è¾¹
 int S; // Source
 int D;  // Destination 
-int dist[MaxVertex];  // ¾àÀë
-int cost[MaxVertex]; // ·ÑÓÃ
-bool collected[MaxVertex];  // Ñ¡ÖĞÇé¿ö 
-int value[MaxVertex][MaxVertex];  // ÊÕ·Ñ
+int dist[MaxVertex];  // è·ç¦»
+int cost[MaxVertex]; // è´¹ç”¨
+bool collected[MaxVertex];  // é€‰ä¸­æƒ…å†µ 
+int value[MaxVertex][MaxVertex];  // æ”¶è´¹
 int G[MaxVertex][MaxVertex];
 using namespace std; 
 
@@ -35,7 +35,7 @@ void build(){
 	}
 }
 
-// ³õÊ¼»¯Ô´µãĞÅÏ¢ 
+// åˆå§‹åŒ–æºç‚¹ä¿¡æ¯ 
 void InitSource(){
 	dist[S] = 0;
 	collected[S] = true;
@@ -46,7 +46,7 @@ void InitSource(){
 		}
 }
 
-// ²éÕÒÎ´±»ÊÕÂ¼ÖĞdist×îĞ¡µÄµã 
+// æŸ¥æ‰¾æœªè¢«æ”¶å½•ä¸­distæœ€å°çš„ç‚¹ 
 Vertex FindMin(){
 	int min = INF;
 	Vertex xb = -1;
@@ -67,10 +67,10 @@ void Dijkstra(){
 		collected[v] = true;
 		for(Vertex w=0;w<N;w++)
 			if(!collected[w] && G[v][w])
-				if(dist[v] + G[v][w] < dist[w]){  // Èç¹ûÓĞÂ·¾¶¸ü¶Ì 
+				if(dist[v] + G[v][w] < dist[w]){  // å¦‚æœæœ‰è·¯å¾„æ›´çŸ­ 
 					dist[w] = dist[v] + G[v][w];
 					cost[w] = cost[v] + value[v][w];
-				}else if(dist[v] + G[v][w] == dist[w] && cost[v] + value[v][w] < cost[w]){  // Èç¹ûÂ·¾¶Ò»Ñù³¤£¬Ñ¡Ôñ·ÑÓÃ¸üÉÙ 
+				}else if(dist[v] + G[v][w] == dist[w] && cost[v] + value[v][w] < cost[w]){  // å¦‚æœè·¯å¾„ä¸€æ ·é•¿ï¼Œé€‰æ‹©è´¹ç”¨æ›´å°‘ 
 					cost[w] = cost[v] + value[v][w];
 				}
 	}
